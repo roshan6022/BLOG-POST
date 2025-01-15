@@ -12,13 +12,13 @@ export default function SignIn() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.email || !formData.password) {
+    if (!formData.email || !formData.password) {
       return setErrorMessage("Please fill out all fields.");
     }
     try {
       setLoading(true);
       setErrorMessage(null);
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -29,7 +29,7 @@ export default function SignIn() {
       }
       setLoading(false);
       if (res.ok) {
-        navigate("/sign-up");
+        navigate("/");
       }
     } catch (error) {
       setErrorMessage(error.message);
@@ -52,15 +52,6 @@ export default function SignIn() {
         {/* right */}
         <div className="flex-1">
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <div>
-              <Label value="Your username" />
-              <TextInput
-                type="text"
-                placeholder="username"
-                id="username"
-                onChange={handleChange}
-              />
-            </div>
             <div>
               <Label value="Your email" />
               <TextInput
@@ -89,14 +80,14 @@ export default function SignIn() {
                   <Spinner size="sm" /> <span className="pl-3">Loading...</span>
                 </>
               ) : (
-                "Sign Up"
+                "Sign In"
               )}
             </Button>
           </form>
           <div className="flex gap-2 text-sm mt-5">
-            <span>Have an account?</span>
-            <Link to="/sign-in" className="text-blue-500">
-              Sign In
+            <span>Doesn't have an account?</span>
+            <Link to="/sign-up" className="text-blue-500">
+              Sign Up
             </Link>
           </div>
           {errorMessage && (
