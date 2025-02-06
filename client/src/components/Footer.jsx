@@ -30,7 +30,7 @@ export default function FooterCom() {
                 <Footer.Link
                   href="https://www.100jsprojects.com"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel=""
                 >
                   100 JS Projects
                 </Footer.Link>
